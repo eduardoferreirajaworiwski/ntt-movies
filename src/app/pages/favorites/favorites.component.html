@@ -7,7 +7,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ movie.Title }}</h5>
             <p class="card-text">{{ movie.Year }}</p>
-            <a class="btn btn-primary" [routerLink]="['/movie-details', movie.imdbID]">More Details</a>
+            <a class="btn btn-primary btn-details" [routerLink]="['/movie-details', movie.imdbID]">More Details</a>
             <button class="btn btn-danger me-2" (click)="removeFromFavorites(movie.imdbID)">Remove from Favorites</button>
           </div>
         </div>

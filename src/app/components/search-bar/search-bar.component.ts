@@ -11,6 +11,7 @@ import { FavoritesService } from 'src/app/shared/services/favorites.service';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
+  public noResultsFound: boolean = false;
   public searchedTerm: string = '';
   public searchMovie: MovieRequest[] = [];
   public isLoading: boolean = false;
@@ -29,21 +30,27 @@ export class SearchBarComponent implements OnInit {
       this.isLoading = true;
       this.apiMoviesService.getMoviesByTitle(this.searchedTerm)
         .pipe(
-          catchError(error => { // Handle errors gracefully
+          catchError(error => {
             console.error('Error fetching movies:', error);
             this.isLoading = false;
-            // You can emit an error event or display an error message to the user here
-            return EMPTY; // Return an empty observable to stop the subscription chain
+            this.searchMovie = []; // Reset search results
+            this.noResultsFound = true; // Set noResultsFound to true
+            return EMPTY;
           })
         )
         .subscribe(
           (movies: MovieRequest[]) => {
             this.searchMovie = movies;
+            this.noResultsFound = this.searchMovie.length === 0; // Update noResultsFound based on search results
             this.isLoading = false;
           }
         );
+    } else {
+      this.searchMovie = []; // Reset search results
+      this.noResultsFound = false; // Reset noResultsFound if search term is empty
     }
   }
+  
 
   // Check if movie is a favorite
   public isFavorite(imdbID: string): boolean {
