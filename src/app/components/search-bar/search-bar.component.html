@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="texts">
+      <h1>Welcome to NTT Movies!</h1>
+      <p>See our latest movies</p>
+      <p>Or do you want to search for a specific movie?</p>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control someInput" placeholder="Search for movies" aria-label="Search"
+          aria-describedby="button-addon2" [(ngModel)]="searchedTerm">
+        <button class="btn btn-outline-secondary me-2" type="button" id="button-addon2" (click)="search()">Search</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let movie of searchMovie">
+        <div class="card h-100 position-relative">
+          <img class="card-img-top" [src]="movie.Poster" alt="{{ movie.Title }}">
+          <div class="card-body">
+            <h4 class="card-title">{{ movie.Title }}</h4>
+            <p class="card-text">Year: {{ movie.Year }}</p>
+            <div class="d-flex justify-content-between">
+              <!-- Botão Mais Detalhes -->
+              <a [routerLink]="['/movie-details', movie.imdbID]" class="btn btn-primary btn-sm">Mais Detalhes</a>
+              <!-- Botão de Favoritos -->
+              <button class="btn btn-outline-danger" (click)="isFavorite(movie.imdbID) ? removeFromFavorites(movie.imdbID) : addToFavorites(movie)">
+                <i class="bi bi-heart-fill" *ngIf="isFavorite(movie.imdbID)"></i>
+                <i class="bi bi-heart" *ngIf="!isFavorite(movie.imdbID)"></i>
+              </button>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  

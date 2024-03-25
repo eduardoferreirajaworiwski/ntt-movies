@@ -1,0 +1,53 @@
+<div class="container mt-5" *ngIf="movie">
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="movie.Poster" class="card-img-top img-fluid rounded mb-3" [alt]="movie.Title">
+      <div class="card">
+        <a [href]="'https://www.imdb.com/title/'  + movie.imdbID" target="_blank" class="btn btn-primary btn-block mb-3">See on IMDB</a>
+        <div class="card-header">
+          <h5 class="card-title">Additional Info</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Release Date: {{ movie.Released }}</li>
+          <li class="list-group-item">Runtime: {{ movie.Runtime }}</li>
+          <li class="list-group-item">Genre: {{ movie.Genre }}</li>
+          <li class="list-group-item">Director: {{ movie.Director }}</li>
+          <li class="list-group-item">Writer: {{ movie.Writer }}</li>
+          <li class="list-group-item">Language: {{ movie.Language }}</li>
+          <li class="list-group-item">Country: {{ movie.Country }}</li>
+          <li class="list-group-item">Production: {{ movie.Production }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h1>{{ movie.Title }}</h1>
+      <p class="text-muted">{{ movie.Year }}</p>
+      <p>Rated: {{ movie.Rated }}</p>
+      <p>{{ movie.Plot }}</p>
+      <hr>
+      <h3>Cast</h3>
+      <ul class="list-unstyled">
+        <li *ngFor="let actor of movie.Actors.split(', ')">{{ actor }}</li>
+      </ul>
+      <hr>
+      <h3>Ratings</h3>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Sources</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>IMDb</strong>: {{ movie.imdbRating }} ({{ movie.imdbVotes }} votes)
+          </li>
+          <li class="list-group-item"><strong>Metascore</strong>: {{ movie.Metascore }}</li>
+        </ul>
+      </div>
+      <hr>
+      <h3>Awards</h3>
+      <p>{{ movie.Awards }}</p>
+      <hr>
+      <h3>Box Office</h3>
+      <p>{{ movie.BoxOffice }}</p>
+    </div>
+  </div>
+</div>

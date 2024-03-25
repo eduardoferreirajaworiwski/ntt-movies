@@ -1,0 +1,17 @@
+<div class="container">
+    <h2 class="mt-3">Favorites</h2>
+    <div class="row">
+      <div class="col-md-3 mb-3" *ngFor="let movie of favoriteMovies">
+        <div class="card">
+          <img class="card-img-top" [src]="movie.Poster" alt="{{ movie.Title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.Title }}</h5>
+            <p class="card-text">{{ movie.Year }}</p>
+            <a class="btn btn-primary" [routerLink]="['/movie-details', movie.imdbID]">More Details</a>
+            <button class="btn btn-danger me-2" (click)="removeFromFavorites(movie.imdbID)">Remove from Favorites</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
